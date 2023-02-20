@@ -1,2 +1,1 @@
-module.exports = require('./lib/sx127x');
-
+module.exports = require("./lib/sx127x");

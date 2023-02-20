@@ -1,10 +1,8 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const util = require('util');
-const {
-  exec
-} = require('child_process');
-var SX127x = require('../lib/sx127x');
+const util = require("util");
+const { exec } = require("child_process");
+var SX127x = require("../lib/sx127x");
 var sx127x = new SX127x({
   frequency: 434e6,
   dio0Pin: 6, // BCM numbering (run `gpio readall` for info)
@@ -15,36 +13,36 @@ var sx127x = new SX127x({
 });
 
 async function send() {
-	let count = 0;
-	
-	try {
-		await sx127x.open();
-	} catch(err) {
-		console.log(err)
-	}
+  let count = 0;
 
-	while(true) {
-		// send a message every second
-		try {
-			await sx127x.write(new Buffer('hello ' + count++));
-			console.log("successfully sent")
-		} catch (err) {
-			console.log(err);
-		} 
+  try {
+    await sx127x.open();
+  } catch (err) {
+    console.log(err);
+  }
 
-		await util.promisify(setTimeout)(1000);
-	}
+  while (true) {
+    // send a message every second
+    try {
+      await sx127x.write(new Buffer("hello " + count++));
+      console.log("successfully sent");
+    } catch (err) {
+      console.log(err);
+    }
+
+    await util.promisify(setTimeout)(1000);
+  }
 }
 
 send();
 
-process.on('SIGINT', async function() {
+process.on("SIGINT", async function () {
   // close the device
   try {
-	  await sx127x.close();
+    await sx127x.close();
   } catch (err) {
-  	console.log('close failure: ' + err);
-  	process.exit();
+    console.log("close failure: " + err);
+    process.exit();
   }
 
   console.log("success");

@@ -9,23 +9,23 @@ Based on [node-sx127x](https://github.com/sandeepmistry/node-sx127x), built on t
 
 ## Prerequisites
 
- * Linux
- * SPI hardware with driver installed and enabled
-    * for raspberry pi, uncomment `dtparam=spi=on` in `/boot/config.txt`
- * Node.js
+- Linux
+- SPI hardware with driver installed and enabled
+  - for raspberry pi, uncomment `dtparam=spi=on` in `/boot/config.txt`
+- Node.js
 
 # Hardware Wiring
 
-| Semtech SX1276/77/78/79 | Generic Linux | Raspberry Pi |
-| :---------------------: | :-----------: | :----------: |
-| VCC | 3.3V | 3.3V |
-| GND | GND | GND |
-| SCK | SCK | SCK (pin 11) |
-| MISO | MISO | MISO (pin 10) |
-| MOSI | MOSI | MOSI (pin 9) |
-| NSS | Chip enable/select | CS0 (pin 8) or CS1 (pin 7) |
-| NRESET | GPIO pin | GPIO pin |
-| DIO0 | GPIO pin | GPIO pin |
+| Semtech SX1276/77/78/79 |   Generic Linux    |        Raspberry Pi        |
+| :---------------------: | :----------------: | :------------------------: |
+|           VCC           |        3.3V        |            3.3V            |
+|           GND           |        GND         |            GND             |
+|           SCK           |        SCK         |        SCK (pin 11)        |
+|          MISO           |        MISO        |       MISO (pin 10)        |
+|          MOSI           |        MOSI        |        MOSI (pin 9)        |
+|           NSS           | Chip enable/select | CS0 (pin 8) or CS1 (pin 7) |
+|         NRESET          |      GPIO pin      |          GPIO pin          |
+|          DIO0           |      GPIO pin      |          GPIO pin          |
 
 ## Installation
 
@@ -38,7 +38,7 @@ npm install sx127x-driver
 ### Initialize
 
 ```js
-let SX127x = require('sx127x-driver');
+let SX127x = require("sx127x-driver");
 
 let options = {
   // ...
@@ -49,23 +49,23 @@ let sx127x = new SX127x(options);
 
 Supported options:
 
-| Name | Default | Description |
-|------|---------|-------------|
-| `spiBus` | `0` | SPI bus to use |
-| `spiDevice` | `0` | SPI chip select/enable to use |
-| `resetPin` | `24` | GPIO pin number of reset pin |
-| `dio0Pin` | `25` | GPIO pin number of DIO0 pin |
-| `frequency` | `915e6` | Frequency of radio in Hz, see [setFrequency](#frequency) for supported values (make sure your chip supports the frequency you chose) |
-| `spreadingFactor` | `7` | Spreading factor of radio, see [setSpreadingFactor](#spreading-factor) for supported values (spreading factors are orthogonal, so make sure they match when trying to communicate from one chip to another)  |
-| `signalBandwidth` | `125E3` | Signal bandwidth of radio in Hz, see [setSignalBandwidth](#signal-bandwidth) for supported values  |
-| `codingRate` | `4 / 5` | Coding rate of radio, see [setCodingRate](#coding-rate) for supported values |
-| `preambleLength` | `8` | Preamble length of radio, see [setPreambleLength](#preamble-length) for supported values |
-| `syncWord` | `0x12` | Sync word of radio, see [setSyncWord](#sync-word) for supported values |
-| `txPower` | `17` | TX power of radio, see [setTxPower](#tx-power) for supported values |
-| `crc` | `false` | Enable or disable CRC usage |
-| `tempCompensationFactor` | `false` | compensation factor for temperature measurements in degrees celsius (+- some degrees)
-| `debug` | `false` | enable / disable debug output
-| `invertIqReg` | `false` | inverts IQ register on call to open()
+| Name                     | Default | Description                                                                                                                                                                                                 |
+| ------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `spiBus`                 | `0`     | SPI bus to use                                                                                                                                                                                              |
+| `spiDevice`              | `0`     | SPI chip select/enable to use                                                                                                                                                                               |
+| `resetPin`               | `24`    | GPIO pin number of reset pin                                                                                                                                                                                |
+| `dio0Pin`                | `25`    | GPIO pin number of DIO0 pin                                                                                                                                                                                 |
+| `frequency`              | `915e6` | Frequency of radio in Hz, see [setFrequency](#frequency) for supported values (make sure your chip supports the frequency you chose)                                                                        |
+| `spreadingFactor`        | `7`     | Spreading factor of radio, see [setSpreadingFactor](#spreading-factor) for supported values (spreading factors are orthogonal, so make sure they match when trying to communicate from one chip to another) |
+| `signalBandwidth`        | `125E3` | Signal bandwidth of radio in Hz, see [setSignalBandwidth](#signal-bandwidth) for supported values                                                                                                           |
+| `codingRate`             | `4 / 5` | Coding rate of radio, see [setCodingRate](#coding-rate) for supported values                                                                                                                                |
+| `preambleLength`         | `8`     | Preamble length of radio, see [setPreambleLength](#preamble-length) for supported values                                                                                                                    |
+| `syncWord`               | `0x12`  | Sync word of radio, see [setSyncWord](#sync-word) for supported values                                                                                                                                      |
+| `txPower`                | `17`    | TX power of radio, see [setTxPower](#tx-power) for supported values                                                                                                                                         |
+| `crc`                    | `false` | Enable or disable CRC usage                                                                                                                                                                                 |
+| `tempCompensationFactor` | `false` | compensation factor for temperature measurements in degrees celsius (+- some degrees)                                                                                                                       |
+| `debug`                  | `false` | enable / disable debug output                                                                                                                                                                               |
+| `invertIqReg`            | `false` | inverts IQ register on call to open()                                                                                                                                                                       |
 
 ### Open
 
@@ -74,8 +74,8 @@ Open and configure the device:
 ```js
 try {
   await sx127x.open();
-} catch(err) {
-  console.log('Failure to open device: ' + err)
+} catch (err) {
+  console.log("Failure to open device: " + err);
 }
 ```
 
@@ -87,7 +87,7 @@ Close the device:
 try {
   await sx127x.close();
 } catch (err) {
-  console.log('Close failure: ' + err);
+  console.log("Close failure: " + err);
   process.exit();
 }
 ```
@@ -96,11 +96,11 @@ try {
 
 ```js
 try {
-  await sx127x.write(new Buffer('hello ' + count++));
-  console.log("successfully sent")
+  await sx127x.write(new Buffer("hello " + count++));
+  console.log("successfully sent");
 } catch (err) {
-  console.log('Fail to send: ' + err);
-} 
+  console.log("Fail to send: " + err);
+}
 ```
 
 ### Blocking receive
@@ -116,21 +116,22 @@ try {
     }
   }
 } catch (err) {
-  console.log('Fail to receive: ' + err);
+  console.log("Fail to receive: " + err);
 }
 ```
 
 ### Interrupt receive
+
 ```js
 try {
-   await sx127x.open();
-   await sx127x.setContinuousReceiveMode();
-} catch(err) {
-   console.log('Fail to put into continuous receive mode: ' + err)
+  await sx127x.open();
+  await sx127x.setContinuousReceiveMode();
+} catch (err) {
+  console.log("Fail to put into continuous receive mode: " + err);
 }
 
-sx127x.on('data', function(data, rssi, snr) {
-   console.log('data: ' +  data.toString() + ", rssi: " + rssi);
+sx127x.on("data", function (data, rssi, snr) {
+  console.log("data: " + data.toString() + ", rssi: " + rssi);
 });
 ```
 
@@ -142,7 +143,7 @@ Put the radio in sleep mode.
 try {
   await sx127x.sleep();
 } catch (err) {
-  console.log('Fail to put into sleep mode: ' + err);
+  console.log("Fail to put into sleep mode: " + err);
 }
 ```
 
@@ -154,7 +155,7 @@ Put the radio in stand by mode.
 try {
   await sx127x.standBy();
 } catch (err) {
-  console.log('Fail to put into stand by: ' + err);
+  console.log("Fail to put into stand by: " + err);
 }
 ```
 
@@ -171,9 +172,10 @@ try {
   console.log(err);
 }
 ```
- * `txPower` - TX power in dB, defaults to `17`
 
- Supported values are between `2` and `17`.
+- `txPower` - TX power in dB, defaults to `17`
+
+Supported values are between `2` and `17`.
 
 ### Frequency
 
@@ -186,7 +188,8 @@ try {
   console.log(err);
 }
 ```
- * `frequency` - frequency in Hz (`433E6`, `866E6`, `915E6`)
+
+- `frequency` - frequency in Hz (`433E6`, `866E6`, `915E6`)
 
 ### Spreading Factor
 
@@ -199,7 +202,8 @@ try {
   console.log(err);
 }
 ```
- * `spreadingFactor` - spreading factor, defaults to `7`
+
+- `spreadingFactor` - spreading factor, defaults to `7`
 
 Supported values are between `6` and `12`. If a spreading factor of `6` is set, implicit header mode must be used to transmit and receive packets.
 
@@ -215,7 +219,7 @@ try {
 }
 ```
 
- * `signalBandwidth` - signal bandwidth in Hz, defaults to `125E3`.
+- `signalBandwidth` - signal bandwidth in Hz, defaults to `125E3`.
 
 Supported values are `7.8E3`, `10.4E3`, `15.6E3`, `20.8E3`, `31.25E3`, `41.7E3`, `62.5E3`, `125E3`, `250E3` and `500E3`.
 
@@ -231,7 +235,7 @@ try {
 }
 ```
 
- * `codingRate` - coding rate, defaults to `4/5`
+- `codingRate` - coding rate, defaults to `4/5`
 
 Supported values are `4/5`, `4/6`, `4/7` and `4/8`.
 
@@ -247,7 +251,7 @@ try {
 }
 ```
 
- * `preambleLength` - preamble length in symbols, defaults to `8`
+- `preambleLength` - preamble length in symbols, defaults to `8`
 
 Supported values are between `6` and `65535`.
 
@@ -263,7 +267,7 @@ try {
 }
 ```
 
- * `syncWord` - byte value to use as the sync word, defaults to `0x34`
+- `syncWord` - byte value to use as the sync word, defaults to `0x34`
 
 ### CRC
 
@@ -277,7 +281,7 @@ try {
 }
 ```
 
- * `crc` - `true` to enable CRC, `false` to disable
+- `crc` - `true` to enable CRC, `false` to disable
 
 ## Other functions
 
